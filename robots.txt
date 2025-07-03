@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# CondoPay Demo Site
+# Questo è un sito demo per presentazioni a investitori
+# Non indicizzare in quanto è solo per scopi dimostrativi
+
+Disallow: /mock-data.js
+Disallow: /investor-faq.md
+Disallow: /pitch-deck-summary.md
+
+# Sitemap
+Sitemap: /sitemap.xml

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CondoPay - Rivoluziona i Pagamenti Condominiali</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(238, 90, 36, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff08" points="0,1000 1000,800 1000,1000"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #f8f9fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Solution Section */
+        .solution {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .solution-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+        }
+
+        /* Dashboard Mockup */
+        .dashboard {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .dashboard-mockup {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            margin-top: 3rem;
+        }
+
+        .mockup-header {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+
+        .mockup-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .chart-area {
+            background: #f8f9fa;
+            height: 300px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .stats-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* Market Section */
+        .market {
+            padding: 100px 0;
+            background: #2c3e50;
+            color: white;
+        }
+
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .market-card {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        /* Investment Section */
+        .investment {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .investment-highlight {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 2rem 0;
+        }
+
+        .investment-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .investment-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .mockup-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">CondoPay</div>
+            <ul class="nav-links">
+                <li><a href="#problema">Problema</a></li>
+                <li><a href="#soluzione">Soluzione</a></li>
+                <li><a href="#mercato">Mercato</a></li>
+                <li><a href="#team">Team</a></li>
+            </ul>
+            <a href="#investimenti" class="cta-button">Investi Ora</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Rivoluziona i Pagamenti Condominiali</h1>
+                <p>La prima piattaforma SaaS in Italia che automatizza completamente la gestione dei pagamenti condominiali, riducendo la morosità del 50% e aumentando la soddisfazione del 300%</p>
+                <a href="#investimenti" class="cta-button" style="font-size: 1.2rem; padding: 15px 30px;">Scopri l'Opportunità</a>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-number">500K+</div>
+                    <div>Condomini in Italia</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">€250M</div>
+                    <div>Mercato Totale (TAM)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">70%</div>
+                    <div>Usa ancora bollettini cartacei</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15-20%</div>
+                    <div>Tasso morosità attuale</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem" id="problema">
+        <div class="container">
+            <h2 class="section-title">Il Problema che Risolviamo</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto;">
+                Il settore dei pagamenti condominiali in Italia è ancora largamente analogico, 
+                causando inefficienze enormi e perdite economiche significative.
+            </p>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">📄</div>
+                    <h3>Processi Manuali</h3>
+                    <p>70% degli amministratori usa ancora bollettini cartacei, causando ritardi e errori nella gestione dei pagamenti.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">💸</div>
+                    <h3>Alta Morosità</h3>
+                    <p>Tasso medio di morosità del 15-20% per mancanza di sistemi di sollecito automatizzati ed efficaci.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">⏰</div>
+                    <h3>Tempi Lunghi</h3>
+                    <p>Recupero crediti richiede 6-12 mesi per mancanza di workflow strutturati e follow-up sistematici.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">🔍</div>
+                    <h3>Zero Trasparenza</h3>
+                    <p>I condomini non hanno visibilità real-time sulla loro situazione pagamenti, generando confusion e conflitti.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution" id="soluzione">
+        <div class="container">
+            <h2 class="section-title">La Nostra Soluzione</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9;">
+                CondoPay automatizza completamente il ciclo di pagamento condominiale, dall'invio della notifica al recupero crediti.
+            </p>
+            
+            <div class="solution-grid">
+                <div class="solution-card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🔄</div>
+                    <h3>Integrazione Automatica</h3>
+                    <p>Sincronizzazione diretta con CRM esistenti (Domu Studio) per import automatico di scadenze e anagrafiche.</p>
+                </div>
+                <div class="solution-card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">💳</div>
+                    <h3>Pagamenti Digitali</h3>
+                    <p>Pagamento online in 2 click tramite Stripe, con link personalizzati e commissioni trasparenti.</p>
+                </div>
+                <div class="solution-card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📱</div>
+                    <h3>Notifiche Multi-Canale</h3>
+                    <p>Comunicazioni automatiche via Email, SMS e WhatsApp Business con template personalizzabili.</p>
+                </div>
+                <div class="solution-card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+                    <h3>Dashboard Real-Time</h3>
+                    <p>Visibilità completa per amministratori e condomini con analytics avanzate e report dettagliati.</p>
+                </div>
+                <div class="solution-card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">⚖️</div>
+                    <h3>Recupero Crediti</h3>
+                    <p>Workflow automatizzato con escalation programmata e integrazione con servizi legali.</p>
+                </div>
+                <div class="solution-card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🛡️</div>
+                    <h3>Sicurezza Totale</h3>
+                    <p>KYC obbligatorio, crittografia end-to-end, compliance GDPR e certificazione ISO 27001.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Mockup -->
+    <section class="dashboard">
+        <div class="container">
+            <h2 class="section-title">Dashboard Amministratore</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: #666; margin-bottom: 3rem;">
+                Interfaccia intuitiva e potente per gestire tutti i condomini da un'unica piattaforma.
+            </p>
+            
+            <div class="dashboard-mockup">
+                <div class="mockup-header">
+                    <div style="margin-right: 1rem;">🏢</div>
+                    <div>
+                        <h3>Dashboard Principale - Studio Rossi</h3>
+                        <p style="opacity: 0.8;">25 Condomini Gestiti • €2.3M Volume Annuale</p>
+                    </div>
+                </div>
+                
+                <div class="mockup-content">
+                    <div class="chart-area">
+                        📈 Grafico Andamento Pagamenti<br>
+                        <small>(Integrazione con analytics avanzate)</small>
+                    </div>
+                    
+                    <div class="stats-panel">
+                        <div class="stat-item">
+                            <h4>Tasso Pagamento</h4>
+                            <div style="font-size: 2rem; font-weight: bold;">94.2%</div>
+                            <small>+15% vs metodi tradizionali</small>
+                        </div>
+                        <div class="stat-item">
+                            <h4>Incassi Mensili</h4>
+                            <div style="font-size: 2rem; font-weight: bold;">€185K</div>
+                            <small>€2.2M annuale</small>
+                        </div>
+                        <div class="stat-item">
+                            <h4>Morosità</h4>
+                            <div style="font-size: 2rem; font-weight: bold;">3.1%</div>
+                            <small>-75% vs media settore</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Section -->
+    <section class="market" id="mercato">
+        <div class="container">
+            <h2 class="section-title">Opportunità di Mercato</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9;">
+                Un mercato enorme e in crescita, perfetto per una soluzione innovativa come CondoPay.
+            </p>
+            
+            <div class="market-stats">
+                <div class="market-card">
+                    <h3>TAM</h3>
+                    <div style="font-size: 2.5rem; font-weight: bold; margin: 1rem 0;">€250M</div>
+                    <p>Total Addressable Market<br>25.000 amministratori professionali</p>
+                </div>
+                <div class="market-card">
+                    <h3>SAM</h3>
+                    <div style="font-size: 2.5rem; font-weight: bold; margin: 1rem 0;">€50M</div>
+                    <p>Serviceable Available Market<br>Top 5.000 amministratori</p>
+                </div>
+                <div class="market-card">
+                    <h3>SOM (Anno 3)</h3>
+                    <div style="font-size: 2.5rem; font-weight: bold; margin: 1rem 0;">€2.5M</div>
+                    <p>Serviceable Obtainable Market<br>500 amministratori, 5.000 condomini</p>
+                </div>
+                <div class="market-card">
+                    <h3>LTV/CAC</h3>
+                    <div style="font-size: 2.5rem; font-weight: bold; margin: 1rem 0;">13.2x</div>
+                    <p>Eccellenti unit economics<br>ARPU €55/mese per condominio</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team" id="team">
+        <div class="container">
+            <h2 class="section-title">Il Nostro Team</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: #666; margin-bottom: 3rem;">
+                Un team di esperti con esperienza consolidata nel settore immobiliare e fintech.
+            </p>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">👨‍💼</div>
+                    <h3>Marco Rossi</h3>
+                    <p><strong>CEO & Co-Founder</strong></p>
+                    <p>15 anni nel settore immobiliare, ex-Country Manager Tecnocasa. MBA Bocconi.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">👨‍💻</div>
+                    <h3>Luca Bianchi</h3>
+                    <p><strong>CTO & Co-Founder</strong></p>
+                    <p>Ex-Lead Developer Satispay. Esperto in fintech e sistemi di pagamento.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">👩‍💼</div>
+                    <h3>Sofia Verdi</h3>
+                    <p><strong>CFO & Co-Founder</strong></p>
+                    <p>Ex-Investment Director Venture Capital. CFA Charterholder.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Section -->
+    <section class="investment" id="investimenti">
+        <div class="container">
+            <h2 class="section-title">Opportunità di Investimento</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9;">
+                Investire in CondoPay significa entrare in un mercato da €250M completamente sottosviluppato, 
+                con una soluzione che può diventare leader in 24 mesi.
+            </p>
+            
+            <div class="investment-highlight">
+                €700.000 Seed Round
+            </div>
+            
+            <div class="investment-details">
+                <div class="investment-card">
+                    <h3>Sviluppo MVP</h3>
+                    <div style="font-size: 1.8rem; font-weight: bold;">€359K</div>
+                    <p>Team tecnico di 6 sviluppatori per 6 mesi</p>
+                </div>
+                <div class="investment-card">
+                    <h3>Go-to-Market</h3>
+                    <div style="font-size: 1.8rem; font-weight: bold;">€200K</div>
+                    <p>Team sales, marketing e customer success</p>
+                </div>
+                <div class="investment-card">
+                    <h3>Working Capital</h3>
+                    <div style="font-size: 1.8rem; font-weight: bold;">€150K</div>
+                    <p>Operazioni, compliance e riserva</p>
+                </div>
+            </div>
+            
+            <div style="margin: 3rem 0; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 15px;">
+                <h3 style="margin-bottom: 1rem;">Proiezioni Revenue (ARR)</h3>
+                <div style="display: flex; justify-content: space-around; font-size: 1.2rem;">
+                    <div><strong>Anno 1:</strong> €660K</div>
+                    <div><strong>Anno 2:</strong> €1.98M</div>
+                    <div><strong>Anno 3:</strong> €3.3M</div>
+                </div>
+                <p style="margin-top: 1rem; opacity: 0.9;">Break-even: Mese 18 • Cash flow positive: Mese 24</p>
+            </div>
+            
+            <a href="mailto:investors@condopay.it" class="cta-button" style="font-size: 1.3rem; padding: 18px 36px;">
+                Richiedi Pitch Deck Completo
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div style="margin-bottom: 2rem;">
+                <div class="logo" style="font-size: 2rem; margin-bottom: 1rem;">CondoPay</div>
+                <p>"Trasformiamo il modo in cui i condomini pagano, un click alla volta."</p>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem;">
+                <span>📧 info@condopay.it</span>
+                <span>📱 +39 02 1234 5678</span>
+                <span>📍 Milano, Italia</span>
+            </div>
+            <p>&copy; 2025 CondoPay SRL. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animation effects
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-on-scroll');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.problem-card, .solution-card, .team-card, .market-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation for stats
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            function updateCounter() {
+                start += increment;
+                if (start < target) {
+                    element.textContent = Math.floor(start).toLocaleString();
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target.toLocaleString();
+                }
+            }
+            updateCounter();
+        }
+
+        // Animate hero stats when page loads
+        window.addEventListener('load', () => {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach((stat, index) => {
+                const text = stat.textContent;
+                const number = parseInt(text.replace(/[^\d]/g, ''));
+                if (number) {
+                    setTimeout(() => {
+                        stat.textContent = '0';
+                        animateCounter(stat, number);
+                    }, index * 200);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
